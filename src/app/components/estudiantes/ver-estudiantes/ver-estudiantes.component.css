@@ -1,0 +1,70 @@
+
+.contenedor{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.grid-into:nth-child(2) {
+  margin-left: 20px; /* Agrega un margen izquierdo de 20px */
+}
+.grid-into{
+  border: 4px solid #daedeb;
+  border-radius: 15px;
+}
+.icon{
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100px;
+  margin-inline: 10px;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+}
+.dInfo{
+  display: flex;
+}
+.icono{
+  margin-left: 60%;
+}
+/*Estilos de datos*/
+.dGeneral{
+  width: 100%;
+  height: 100%;
+}
+.d1{
+  height: 10%;
+  padding-top: 10px;
+}
+/*Estilos notas*/
+.content-notas {
+  display: flex;
+  flex-wrap: wrap; /* Permitir el ajuste de los elementos en filas */
+  height: 100%; /* Ocupar el 100% del alto del contenedor */
+  width: 100%; /* Ocupar el 100% del ancho del contenedor */
+}
+.title-notas{
+  width: 100%; /* Ocupar el 100% del ancho del contenedor */
+  height: 10%; /* Ocupar el 10% del alto del contenedor */
+  padding-top: 10px; /* Espacio superior */
+}
+.notasEstudiante {
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: calc(50% - 20px); /* Ajusta el ancho de cada elemento al 50% del contenedor */
+  flex-basis: calc(50% - 20px); /* Ajusta el tamaño base para flexibilidad */
+}
+.nota{
+  margin-left: auto;
+  margin-right: auto;
+}
+p{
+  margin-bottom: 0px;
+}
+.dates{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  font-optical-sizing: auto;
+}

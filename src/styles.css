@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*Fuente principal*/
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@1,800&family=Poppins&display=swap');
+/*Fuente secundaria*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jacques+Francois&family=JetBrains+Mono:ital,wght@0,800;1,800&family=Montserrat:ital,wght@1,800&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hammersmith+One&family=Jacques+Francois&family=JetBrains+Mono:ital,wght@0,800;1,800&family=Montserrat:ital,wght@1,800&family=Poppins&display=swap');
+
+.hidden{
+  display: none;
+}
+:root{
+  --paradiso-50: #f4f9f9;
+  --paradiso-100: #daedeb;
+  --paradiso-200: #b4dbd7;
+  --paradiso-300: #87c1be;
+  --paradiso-400: #5ea3a2;
+  --paradiso-500: #408080;
+  --paradiso-600: #356a6c;
+  --paradiso-700: #2d5658;
+  --paradiso-800: #284647;
+  --paradiso-900: #243c3d;
+  --paradiso-930: #112022;
+  --paradiso-950: #091213;
+}
+body{
+  background-color: var(--paradiso-950);
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.title-page{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 30px;
+  font-weight: 800;
+}
+.sub-title{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+html, body { height: 100%; }
+body { }

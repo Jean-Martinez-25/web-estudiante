@@ -1,0 +1,61 @@
+<header class="bg-paradiso-950 shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="dInfo">
+      <p class="text-paradiso-100 title-page">Datos de {{name}} </p>
+      <div class="icono">
+        <mat-icon routerLink="/listEstudiante" matTooltip="Back" class="bg-paradiso-100 icon" fontIcon="home"></mat-icon>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="contenedor">
+    <mat-grid-list class="grid" cols="2" rowHeight="0.55:0.4">
+      <mat-grid-tile class="grid-into">
+        <div class="dGeneral text-paradiso-100">
+          <div class="dSub d1 bg-paradiso-100">
+            <p class="sub-title text-paradiso-950">Datos personales</p>
+          </div>
+          <app-datos-personales [datosEstudiante]="datosEstudiante"></app-datos-personales>
+        </div>
+      </mat-grid-tile>
+      <ng-container *ngIf="courses as cursos">
+        <mat-grid-tile class="grid-into">
+          <div class="content-notas">
+            <div class="bg-paradiso-100 title-notas">
+              <p class="sub-title text-paradiso-950">Notas {{datosEstudiante.vigencia}}</p>
+            </div>
+            <div *ngFor="let curso of cursos" class="notasEstudiante">
+              <div class="nota text-center">
+                <p class="text-paradiso-100 font-medium">Asignatura:</p>
+                <p class="text-paradiso-300 font-mediu dates">{{ curso.nombre }}</p>
+                <app-gauge-chart [curso]="curso"></app-gauge-chart>
+              </div>
+              <div class="infoNota">
+                <div class="asignatura">
+                  <p class="text-sm font-semibold leading-6 text-paradiso-100">Asignatura</p>
+                  <p class="text-sm leading-6 text-paradiso-300 align-self-end dates"> {{curso.nombre}} </p>
+                </div>
+                <div class="asignatura">
+                  <p class="text-sm font-semibold leading-6 text-paradiso-100">Instructor</p>
+                  <p class="text-sm leading-6 text-paradiso-300 align-self-end dates"> {{curso.nombreInstructor}} </p>
+                </div>
+                <div class="asignatura">
+                  <p class="text-sm font-semibold leading-6 text-paradiso-100">Nota</p>
+                  <p class="text-sm leading-6 text-paradiso-300 align-self-end dates"> {{curso.calificacion}} </p>
+                </div>
+                <div class="asignatura">
+                  <p class="text-sm font-semibold leading-6 text-paradiso-100">Creditos</p>
+                  <p class="text-sm leading-6 text-paradiso-300 align-self-end dates"> {{curso.creditos}} </p>
+                </div>
+              </div>
+              <hr>
+            </div>
+
+          </div>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </div>
+</main>
+

@@ -1,0 +1,53 @@
+.header{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.dTitulo{
+  margin-bottom: 10px;
+}
+.body{
+  width: 400px;
+  height: 430px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10%;
+}
+.dImg{
+  padding-top: 20px;
+}
+.dImg2{
+  margin-left: auto;
+  margin-right: auto;
+  width: 225px;
+  height: 225px;
+}
+.dDatos{
+  margin-top: 20px;
+}
+.name{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+  font-weight: 800;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
+.description{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
+.dRedes{
+  margin-top: 40px;
+}
+.ic{
+  font-size: 40px;
+}
+.info-p{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}

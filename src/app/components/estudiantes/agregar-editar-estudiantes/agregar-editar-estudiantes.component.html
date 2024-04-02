@@ -1,0 +1,81 @@
+
+  <header class="shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <p class="text-3xl font-bold tracking-tight text-paradiso-50 title-page">
+        {{accion}}
+      </p>
+    </div>
+  </header>
+  <main>
+    <div class="container-form">
+      <form [formGroup]="formEstudiante" (ngSubmit)="agregarEditarEstudiante()" class="shadow-md rounded-lg overflow-hidden bg-paradiso-950 frm">
+        <mat-grid-list cols="2" rowHeight="75px">
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Id Estudiante</mat-label>
+              <input class="inputD" matInput placeholder="Ex: 100989745" formControlName="idEstudiante">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Nombre</mat-label>
+              <input class="inputD" placeholder="Ex: Juan" matInput formControlName="nombre">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Apellido</mat-label>
+              <input class="inputD" placeholder="Ex: Gómez" matInput formControlName="apellido">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Programa</mat-label>
+              <mat-select formControlName="programa">
+                <mat-option value="Ingeniería de Sistemas">Ingeniería de Sistemas</mat-option>
+                <mat-option value="Administración de Empresas">Administración de Empresas</mat-option>
+                <mat-option value="Contaduria Publica">Contaduria Publica</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Telefono</mat-label>
+              <input class="inputD" placeholder="Ex: 302321452" matInput formControlName="telefono">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input class="inputD" placeholder="Ex: correo@gmail.com" matInput formControlName="email">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input type="date" class="inputD" matInput formControlName="fechaNacimiento">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="estado">
+                <mat-option value="Matriculado">Matriculado</mat-option>
+                <mat-option value="Inscrito">Inscrito</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <mat-form-field appearance="fill">
+              <mat-label>Vigencia</mat-label>
+              <input class="inputD" type="number" placeholder="Ex: 20231" matInput formControlName="vigencia">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <button [disabled]="formEstudiante.invalid" type="submit" mat-raised-button color="primary" class="bg-paradiso-40 icon text-paradiso-950 font-medium">Finalizar</button>
+            <button mat-raised-button class="btnVolver" routerLink="/listEstudiante">Volver</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </div>
+  </main>
