@@ -1,0 +1,49 @@
+<header class="bg-paradiso-950 shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <p class="text-paradiso-100 title-page">Listado de Estudiantes Inscritos</p>
+  </div>
+</header>
+<main>
+  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div class="overflow-x-auto">
+      <table mat-table [dataSource]="dataSource" class="table-auto w-full border-collapse border border-paradiso-100" matSort>
+        <!--Id-->
+        <ng-container matColumnDef="idEstudiante">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef mat-sort-header>Id estudiante</th>
+          <td mat-cell *matCellDef="let element">{{element.idEstudiante}}</td>
+        </ng-container>
+        <!--name-->
+        <ng-container matColumnDef="name">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{element.nombre}} {{element.apellido}}</td>
+        </ng-container>
+        <!--Programa-->
+        <ng-container matColumnDef="programa">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef>Programa</th>
+          <td mat-cell *matCellDef="let element"> {{element.programa}}</td>
+        </ng-container>
+        <!--Programa-->
+        <ng-container matColumnDef="semestre">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef>Semestre</th>
+          <td mat-cell *matCellDef="let element"> {{element.semestre}}</td>
+        </ng-container>
+        <ng-container matColumnDef="vigencia">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef>Vigencia</th>
+          <td mat-cell *matCellDef="let element"> {{element.vigencia}}</td>
+        </ng-container>
+          <ng-container matColumnDef="ver">
+          <th class="text-jade-500" mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon matTooltip="View" class="icon view" fontIcon="search"></mat-icon>
+            <mat-icon routerLink="/persona/asignacion-asignaturas/{{element.id}}" matTooltip="Asignar asignaturas" class="icon start bg-jade-800" fontIcon="notes"></mat-icon>
+            <mat-icon routerLink="/persona/asignacion-horario/{{element.id}}" matTooltip="Asignar horarios" class="icon bg-waikawa-gray-800" fontIcon="schedule"></mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+  </div>
+</main>

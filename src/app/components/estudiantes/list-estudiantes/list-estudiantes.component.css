@@ -26,3 +26,7 @@ table{
 .paginator{
   background-color: transparent;
 }
+.icon-mat{
+  padding: 5px;
+  border-radius: 20px;
+}

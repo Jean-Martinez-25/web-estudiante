@@ -1,0 +1,130 @@
+<div class="contendor-principal">
+  <div class="container-form">
+    <form [formGroup]="formHorario" (submit)="validarFormulario()" class="formulario">
+      <mat-grid-list cols="2" rowHeight="75px">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione al docente</mat-label>
+            <mat-select formControlName="IdInstructor">
+                <ng-container *ngFor="let instruc of instructores">
+                  <mat-option value="{{instruc.id}}"> {{instruc.apellido}} {{instruc.nombre}} </mat-option>
+                </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Grupo</mat-label>
+            <input type="number"  placeholder="Ex: 1001" matInput formControlName="IdGrupo">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione el salon</mat-label>
+            <mat-select formControlName="IdSalon" (selectionChange)="previewHorario()">
+                <ng-container *ngFor="let salon of salones">
+                <mat-option value="{{salon.id}}">{{salon.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione el día</mat-label>
+            <mat-select formControlName="IdDia" (selectionChange)="previewHorario()">
+              <mat-option value="1">Lunes</mat-option>
+              <mat-option value="2">Martes</mat-option>
+              <mat-option value="3">Miercoles</mat-option>
+              <mat-option value="4">Jueves</mat-option>
+              <mat-option value="5">Viernes</mat-option>
+              <mat-option value="6">Sábado</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Inicio</mat-label>
+            <mat-select formControlName="HoraInicio" (selectionChange)="filtrarHorariosDisponibles($event.value)">
+              <ng-container *ngFor="let horario of horarios">
+                <mat-option value="{{horario.id}}">{{horario.tipoHora}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Final</mat-label>
+            <mat-select formControlName="HoraFin" (selectionChange)="obtenerJornada($event.value)">
+              <ng-container *ngFor="let horario of horariosDisponibles">
+                <mat-option value="{{horario.id}}">{{horario.tipoHora}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione la asignatura</mat-label>
+            <mat-select formControlName="CodigoComun">
+                <ng-container *ngFor="let asignatura of asignaturas">
+                <mat-option value="{{asignatura.id}}-{{asignatura.idCodigoComun}}"> {{asignatura.nombre}} - {{asignatura.idCodigoComun}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <button  type="submit" [disabled]="formHorario.invalid"
+            class="bg-jade-400 hover:bg-jade-800 text-paradiso-950 hover:text-white font-bold py-2 px-4 rounded but">
+            Finalizar
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div class="preview-horarios">
+    <ng-container *ngIf="cargarPreview">
+      <app-preview-horarios></app-preview-horarios>
+    </ng-container>
+  </div>
+</div>
+
+<!--Modal-->
+<ng-container *ngIf="modal">
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="p-4 rounded-lg bg-steel-gray-100">
+      <h2 class="text-lg font-bold mb-4 h2-dialog">Cruce de horarios</h2>
+      <div class="body-dialog">
+        <ng-container *ngFor="let item of preview">
+          <ng-container *ngIf="enlace">
+            <p class="mb-4 p-dialog">
+              El docente {{item.nombreInstructor}} ya tiene una clase el día {{item.nombreDia}} en el salón
+              {{item.salon}} en el siguiente horario: {{item.horario}}, si es una clase en común <strong>puedes enlazarla</strong>.
+            </p>
+          </ng-container>
+          <ng-container *ngIf="docenteO">
+            <p class="mb-4 p-dialog">
+              El docente {{item.nombreInstructor}} ya tiene asignada la clase de {{item.asignatura}} el día {{item.nombreDia}} en el salón
+              {{item.salon}} en el siguiente horario: {{item.horario}}.
+            </p>
+          </ng-container>
+          <ng-container *ngIf="salonO">
+            <p class="mb-4 p-dialog">
+              Opps al parecer ya hay una clase en el salon {{item.salon}} el día {{item.nombreDia}}
+              en el siguiente horario: {{item.horario}}, con el docente {{item.nombreInstructor}}.
+            </p>
+          </ng-container>
+
+        </ng-container>
+      </div>
+      <div class="dialog-button">
+        <button class="bg-salomie-400 hover:bg-salomie-800 text-paradiso-950 hover:text-white font-bold py-2 px-4 rounded but" (click)="closeModal()">
+          Editar
+        </button>
+        <ng-container *ngIf="enlace">
+          <button class="bg-jade-400 hover:bg-jade-800 text-paradiso-950 hover:text-white font-bold py-2 px-4 rounded but" (click)="enlazarClases()">
+            Enlazar
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>

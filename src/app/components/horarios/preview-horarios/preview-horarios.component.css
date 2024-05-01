@@ -1,0 +1,14 @@
+
+.pre-body, .pre-header{
+  padding: 10px;
+  text-align: center;
+}
+.titulo{
+  color: #f4f9f9;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 20px;
+  font-weight: 800;
+}
+table, mat-paginator{
+  background-color: transparent;
+}

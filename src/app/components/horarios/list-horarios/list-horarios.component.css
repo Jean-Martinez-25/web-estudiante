@@ -1,0 +1,18 @@
+
+table{
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: transparent;
+}
+.paginator{
+  background-color: transparent;
+}
+th{
+  color: #ffffff;
+  font-weight: 700;
+}
+
+td{
+  font-weight: 400;
+  text-transform: capitalize;
+}

@@ -12,7 +12,7 @@ export class EstudiantesService {
   private myAppUrl: string = environment.endpoint;
   //Apis a utilizar
   private ApiEstudiante: string = 'api/Estudiante/';
-  private ApiNota: string = 'api/Notas/'
+  private ApiNota: string = 'api/Notas/';
   //Inyectamos a http para poder realizar las peticiones
   constructor(private http: HttpClient) { }
 

@@ -1,0 +1,28 @@
+
+header{
+  backdrop-filter: blur(5px);
+  border-bottom: 2px solid #daedeb;
+}
+.frm{
+  border-radius: 10px;
+  border: 2px solid #6d6d6d;
+  background-color:  #262626;
+  padding-top: 20px;
+}
+.btnVolver{
+  margin-left: 20px;
+}
+.container-form{
+  width: 60%;
+  height: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+mat-form-field{
+  width: 90%;
+  padding-bottom: 10px;
+}
+input{
+  text-transform: capitalize;
+}

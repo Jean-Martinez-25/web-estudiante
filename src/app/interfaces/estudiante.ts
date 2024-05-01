@@ -1,15 +1,16 @@
+import { IPrograma } from "./programa";
+
 export interface IEstudiante {
   id?: number;
   idEstudiante: number,
   nombre: string;
   apellido: string;
-  programa: string;
+  idPrograma: number;
+  programa?: string;
   telefono: number;
   email: string;
   fecha_nacimiento: string;
-  estado: string;
   vigencia: number,
-  courses?: INota[]; // Lista de notas del estudiante
 }
 
 

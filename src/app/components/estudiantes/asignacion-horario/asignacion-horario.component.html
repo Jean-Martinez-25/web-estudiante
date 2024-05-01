@@ -1,0 +1,106 @@
+<div class="contendor-principal">
+  <div class="container-form">
+    <h3 class="title">Creando horario para estudiante:
+      <br> {{nombre}}
+    </h3>
+      <ng-container *ngIf="preview.length > 0">
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <div class="overflow-x-auto">
+            <table mat-table [dataSource]="dataS" class="table-auto w-full border-collapse border tabla">
+              <!--Id-->
+              <ng-container matColumnDef="Dia">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Dia</th>
+                <td mat-cell *matCellDef="let element">{{element.nombreDia}}</td>
+              </ng-container>
+              <!--name-->
+              <ng-container matColumnDef="Docente">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Instructor</th>
+                <td mat-cell *matCellDef="let element">{{element.nombreInstructor}} {{element.apellidoInstructor}}</td>
+              </ng-container>
+              <!--Programa-->
+              <ng-container matColumnDef="Asignatura">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Asignatura</th>
+                <td mat-cell *matCellDef="let element"> {{element.asignatura}}</td>
+              </ng-container>
+              <!--Programa-->
+              <ng-container matColumnDef="Salon">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Salon</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreSalon}}</td>
+              </ng-container>
+              <ng-container matColumnDef="Hora">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Hora</th>
+                <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Jornada">
+                <th class="text-jade-400 text-center" mat-header-cell *matHeaderCellDef>Jornada</th>
+                <td mat-cell *matCellDef="let element"> {{element.jornada}}</td>
+              </ng-container>
+              <ng-container matColumnDef="Accion">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Remover</th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                  <mat-icon matTooltip="Asignar horario" (click)="remove(element, i)" class="icon start bg-geraldine-600" fontIcon="remove"></mat-icon>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+
+  <div class="preview-horarios">
+    <ng-container *ngIf="dataSource.data.length > 0">
+      <main>
+        <div>
+          <h3 class="text-center text-jade-100 title">
+            Horario disponible para {{datosPrograma.nombre}}.
+            <br>Semestre: {{semestre}}
+          </h3>
+        </div>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <div class="overflow-x-auto">
+            <table mat-table [dataSource]="dataSource" class="table-auto w-full border-collapse border tabla">
+              <!--Id-->
+              <ng-container matColumnDef="Dia">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Dia</th>
+                <td mat-cell *matCellDef="let element">{{element.nombreDia}}</td>
+              </ng-container>
+              <!--name-->
+              <ng-container matColumnDef="Docente">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Instructor</th>
+                <td mat-cell *matCellDef="let element">{{element.nombreInstructor}} {{element.apellidoInstructor}}</td>
+              </ng-container>
+              <!--Programa-->
+              <ng-container matColumnDef="Asignatura">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Asignatura</th>
+                <td mat-cell *matCellDef="let element"> {{element.asignatura}}</td>
+              </ng-container>
+              <!--Programa-->
+              <ng-container matColumnDef="Salon">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Salon</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreSalon}}</td>
+              </ng-container>
+              <ng-container matColumnDef="Hora">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Hora</th>
+                <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Jornada">
+                <th class="text-jade-400 text-center" mat-header-cell *matHeaderCellDef>Jornada</th>
+                <td mat-cell *matCellDef="let element"> {{element.jornada}}</td>
+              </ng-container>
+              <ng-container matColumnDef="Accion">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Agregar</th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon matTooltip="Asignar horario" (click)="agregarHorario(element)" class="icon start bg-jade-800" fontIcon="add"></mat-icon>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </main>
+    </ng-container>
+  </div>
+</div>

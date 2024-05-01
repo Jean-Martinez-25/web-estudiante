@@ -1,0 +1,27 @@
+th{
+  font-weight: 800;
+  font-style: normal;
+  font-size: 16px;
+}
+tr{
+  font-weight: 500;
+  font-style: normal;
+  font-size: 13px;
+}
+table{
+  font-family: "Hammersmith One", sans-serif;
+  background-color: transparent;
+}
+
+.icon{
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100px;
+  margin-inline: 10px;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+}
+.paginator{
+  background-color: transparent;
+}

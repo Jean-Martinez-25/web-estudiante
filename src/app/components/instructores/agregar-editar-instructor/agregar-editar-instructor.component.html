@@ -1,0 +1,56 @@
+
+<header class="shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <p class="text-3xl font-bold tracking-tight text-paradiso-50 title-page">
+      {{accion}}
+    </p>
+  </div>
+</header>
+<main>
+  <div class="container-form">
+    <form [formGroup]="formInstructor" (ngSubmit)="agregarEditarInstructor()" class="shadow-md rounded-lg overflow-hidden bg-paradiso-950 frm">
+      <mat-grid-list cols="2" rowHeight="75px">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Id Instructor</mat-label>
+            <input class="inputD" matInput placeholder="Ex: 100989745" formControlName="idInstructor">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input class="inputD" placeholder="Ex: Juan" matInput formControlName="nombre">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input class="inputD" placeholder="Ex: Gómez" matInput formControlName="apellido">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input class="inputD" placeholder="Ex: 302321452" matInput formControlName="telefono">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input class="inputD" placeholder="Ex: correo@gmail.com" matInput formControlName="email">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Alias</mat-label>
+            <input class="inputD" placeholder="Ex: CONTADOR 1" matInput formControlName="alias">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <button [disabled]="formInstructor.invalid" type="submit" mat-raised-button color="primary" class="bg-paradiso-40 icon text-paradiso-950 font-medium">Finalizar</button>
+          <button mat-raised-button class="btnVolver" routerLink="/instructor/listado-instructores">Volver</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+</main>

@@ -1,0 +1,57 @@
+<header class="bg-paradiso-950 shadow">
+  <div class="superiorPart">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 item name">
+      <p class="text-3xl font-bold tracking-tight text-paradiso-50 title-page">Creación de horarios</p>
+    </div>
+      <div class="item boton">
+        <button class="bg-paradiso-100 iconS" matTooltip="Volver" (click)="refrescar()">
+          <mat-icon fontIcon="home"></mat-icon>
+        </button>
+      </div>
+  </div>
+
+</header>
+<main>
+  <ng-container *ngIf="action == 'Inicio'">
+    <div class="container-form">
+      <form [formGroup]="formBuscarPrograma" class="shadow-md rounded-lg overflow-hidden frm">
+        <mat-grid-list cols="2" rowHeight="80px">
+          <mat-grid-tile class="select">
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione un programa</mat-label>
+              <mat-select formControlName="programa" (selectionChange)="onChange($event.value)">
+                <ng-container *ngFor="let program of programas">
+                  <mat-option value="{{program.id}}"> {{program.nombre}} </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="select">
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona el semestre</mat-label>
+              <mat-select formControlName="semestre">
+                <ng-container *ngFor="let semestre of semestres">
+                  <mat-option value="{{semestre.id}}"> {{semestre.name}} </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2">
+            <button [disabled]="formBuscarPrograma.invalid" (click)="cargarHorarios()" type="submit" mat-raised-button color="primary" class="consultarBtn bg-paradiso-40 icon text-paradiso-950 font-medium">Consultar</button>
+            <button [disabled]="formBuscarPrograma.invalid" (click)="crearHorario()" mat-raised-button color="warn" class="consultarBtn bg-paradiso-40 icon text-paradiso-950 font-medium">Crear</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="action == 'Cargar horarios'">
+    <app-list-horarios [datos] = "datos"></app-list-horarios>
+  </ng-container>
+  <ng-container *ngIf="action == 'Crear horarios'">
+    <div class="create">
+      <div class="formulario-horarios">
+        <app-formulario-horarios [datos] = "datos"></app-formulario-horarios>
+      </div>
+    </div>
+  </ng-container>
+</main>

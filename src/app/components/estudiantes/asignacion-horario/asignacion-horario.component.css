@@ -1,0 +1,47 @@
+.contendor-principal{
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+}
+
+.container-form{
+  width: 50%;
+  margin-left: 10px;
+  margin-right: 5px;
+  color: #fff;
+  padding: 10px 0 0 10px;
+}
+.title{
+  font-family: "JetBrains Mono", monospace;
+}
+.preview-horarios{
+  width: 50%;
+  max-height: 700px;
+  overflow-y: auto;
+  margin-right: 10px;
+  margin-right: 5px;
+}
+.container-form, .preview-horarios{
+  background-color: #262626;
+  border-radius: 10px;
+}
+.formulario{
+  padding-top: 15px;
+}
+.tabla{
+  background-color: transparent;
+}
+.icon{
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100px;
+  margin-inline: 10px;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.icon-mat{
+  padding: 5px;
+  border-radius: 20px;
+}

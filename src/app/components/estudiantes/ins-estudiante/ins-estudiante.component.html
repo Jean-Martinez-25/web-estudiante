@@ -1,0 +1,50 @@
+
+<header class="shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <p class="text-3xl font-bold tracking-tight text-paradiso-50 title-page">
+      Inscripción estudiante: {{nombreEstudiante}}
+    </p>
+  </div>
+</header>
+<main>
+  <div class="container-form">
+    <form [formGroup]="formInscripcion" (ngSubmit)="InscribirEstudiante()" class="shadow-md rounded-lg overflow-hidden bg-paradiso-950 frm">
+      <mat-grid-list cols="2" rowHeight="75px">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Id Estudiante</mat-label>
+            <input class="inputD" type="number" matInput placeholder="Ex: 100989745" formControlName="idEstudiante">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+              <mat-label>Programa de interes</mat-label>
+              <mat-select formControlName="idPrograma">
+                <ng-container *ngFor="let program of programas">
+                  <mat-option value="{{program.id}}"> {{program.nombre}} </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Semestre</mat-label>
+            <input class="inputD" type="number" placeholder="Ex: 1" matInput formControlName="semestre">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Vigencia</mat-label>
+            <input class="inputD" type="number" placeholder="Ex: 20241" matInput formControlName="vigencia">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <button [disabled]="formInscripcion.invalid" type="submit" mat-raised-button color="primary" class="bg-paradiso-40 icon text-paradiso-950 font-medium">Finalizar</button>
+          <button mat-raised-button class="btnVolver" routerLink="/persona/listado-aspirantes">Volver</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+</main>
+

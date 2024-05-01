@@ -1,0 +1,59 @@
+mat-form-field{
+  width: 90%;
+  padding-bottom: 10px;
+}
+.container-form{
+  width: 30%;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.preview-horarios{
+  width: 70%;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-right: 10px;
+  margin-right: 5px;
+}
+.container-form, .preview-horarios{
+  background-color: #262626;
+  border-radius: 10px;
+}
+.formulario{
+  padding-top: 15px;
+}
+
+
+/*Modal*/
+
+.h2-dialog{
+  color: #1e1a34;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800;
+  padding-top: 10px;
+  padding-left: 15px;
+  border-bottom: 1px solid #1e1a34;
+}
+.p-dialog{
+  font-family: "Hammersmith One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.body-dialog{
+  padding-left: 15px;
+  margin-block: 20px;
+}
+.dialog-button{
+  justify-content: end;
+  text-align: end;
+}
+.container-form, .preview-horarios{
+  width: 50%;
+  gap: 1;
+}
+.contendor-principal{
+  width: 100%;
+  display: flex;
+}
+.but{
+  margin-right: 10px;
+}
