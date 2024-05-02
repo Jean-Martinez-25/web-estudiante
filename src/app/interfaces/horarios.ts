@@ -29,6 +29,7 @@ export interface IHorariosView {
   vigencia: number,
   nombreProgrma: string,
   idPrograma?: number,
+  cantidadEstudiante?: number
 }
 export interface IPreviewHorario{
   nombreDia: string,

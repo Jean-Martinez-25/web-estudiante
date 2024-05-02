@@ -1,6 +1,11 @@
+<div class="volver">
+  <button class="bg-paradiso-100 iconS" matTooltip="Volver" routerLink="/persona/listado-inscritos">
+    <mat-icon fontIcon="home"></mat-icon>
+  </button>
+</div>
 <div class="contendor-principal">
   <div class="container-form">
-    <h3 class="title">Creando horario para estudiante:
+    <h3 class="title text-center py-2">Creando horario para estudiante:
       <br> {{nombre}}
     </h3>
       <ng-container *ngIf="preview.length > 0">
@@ -53,8 +58,8 @@
     <ng-container *ngIf="dataSource.data.length > 0">
       <main>
         <div>
-          <h3 class="text-center text-jade-100 title">
-            Horario disponible para {{datosPrograma.nombre}}.
+          <h3 class="title text-center py-2 text-jade-100">
+            Horario disponible para {{datosPrograma?.nombre}}.
             <br>Semestre: {{semestre}}
           </h3>
         </div>

@@ -60,7 +60,6 @@ export class AsignacionAsignaturasComponent {
       this.semestre = data.semestre;
       this.idEstudiante = data.idEstudiante;
       this.obtenerAsignaturas(Number(data.idPrograma), data.semestre);
-      //this.obtenerHorarioDiponible(Number(data.idPrograma), data.semestre);
       this.obtenerPrograma(Number(data.idPrograma));
       this.obtenerNombre(this.idEstudiante);
     });
@@ -79,6 +78,7 @@ export class AsignacionAsignaturasComponent {
   obtenerVigencia(){
     this._salonesService.getVigencia().subscribe(data => {
       this.vigencia = data[0].vigencia!;
+      this.obtenerCargaAcademica(this.id, data[0].vigencia)
     });
   }
   obtenerPrograma(idPrograma: number){
@@ -91,6 +91,15 @@ export class AsignacionAsignaturasComponent {
       this.nombre = `${data.apellido} ${data.nombre}`;
     })
   }
+  obtenerCargaAcademica(idEstudiante: number, vigencia: number){
+    this._horarioService.obtenerCargaAcademicaEstudiante(idEstudiante, vigencia).subscribe(data => {
+      if(data.length > 0){
+        for(let item of data){
+          this.actualizar(item);
+        }
+      }
+    });
+  }
   agregarHorario(datos: IAsignaturas){
     let attr: ICargaAcademicaEstudiante = {
       idEstudiante : this.id,
@@ -100,7 +109,7 @@ export class AsignacionAsignaturasComponent {
     }
     if(this.cargaEstudiante.length >= 1){
       let asignaturaEncontrada = false;
-      for(let item of this.preview){
+      for(let item of this.cargaEstudiante){
         if(attr.idAsignatura == item.idAsignatura){
           asignaturaEncontrada = true;
           break;
@@ -127,11 +136,23 @@ export class AsignacionAsignaturasComponent {
     this.preview.push(datos)
     this.dataS.data = this.preview;
   }
+  actualizar(datos: IAsignaturas){
+    this.preview.push(datos)
+    this.dataS.data = this.preview;
+  }
   finalizar(){
+    let insert: boolean = false;
+    let contador : number = 0;
     for(let item of this.cargaEstudiante){
       this._horarioService.agregarCargaAcademicaEstudiante(item).subscribe(data => {
-        console.log(data);
+        insert = true;
+        contador += 1;
       })
+    }
+    if(insert && contador > 1){
+      this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignaturas.`);
+    }else if(insert && contador == 1){
+      this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignatura.`);
     }
   }
 }

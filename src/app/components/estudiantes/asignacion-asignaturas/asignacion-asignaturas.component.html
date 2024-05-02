@@ -1,9 +1,14 @@
+<div class="volver">
+  <button class="bg-paradiso-100 iconS" matTooltip="Volver" routerLink="/persona/listado-inscritos">
+    <mat-icon fontIcon="home"></mat-icon>
+  </button>
+</div>
 <div class="contendor-principal">
   <div class="container-form">
     <h3 class="title text-center py-2">Asignación de asignaturas para el/la estudiante:
       <br> {{nombre}}
     </h3>
-      <ng-container *ngIf="preview.length > 0">
+      <ng-container *ngIf="preview.length > 0 ">
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div class="overflow-x-auto">
             <table mat-table [dataSource]="dataS" class="table-auto w-full border-collapse border tabla">

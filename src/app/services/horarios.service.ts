@@ -4,7 +4,7 @@ import { empty, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IHorariosView, IPreviewHorario } from '../interfaces/horarios';
 import { Ihorario } from '../interfaces/horarios';
-import { ICargaAcademicaEstudiante, IRespuestaCargaAcademica } from '../interfaces/asignaturas';
+import { IAsignaturas, ICargaAcademicaEstudiante, IRespuestaCargaAcademica } from '../interfaces/asignaturas';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class HorariosService {
   private myAppUrl: string = environment.endpoint;
   //Apis a utilizar
   private ApiHorario: string = 'api/NewHorario/';
+  private HorarioEstudiante: string = 'horarios-con-estudiantes';
   private CargaAcademica: string = 'api/CargaAcademicaEstudiante';
+  private cargaEstudiante: string = '/carga-academica-estudiante'
   private Horario: string = 'consultar-horario'
   private HorarioDocente: string = 'consulta-horario-docente'
   private HorarioDocenteEnlace: string = 'consulta-horario-docente-enlace'
@@ -22,6 +24,14 @@ export class HorariosService {
 
   getHorario(id: number, semestre: number): Observable<IHorariosView[]>{
     return this.http.get<IHorariosView[]>(`${this.myAppUrl}${this.ApiHorario}${this.Horario}?idPrograma=${id}&semestre=${semestre}`);
+  }
+  getHorariosConCarga(id: number, semestre: number, codigosComunes: number[]): Observable<IHorariosView[]>{
+    let params = {
+      idPrograma: id.toString(),
+      semestre: semestre.toString(),
+      codigosComunes : codigosComunes.map(codigo => codigo.toString())
+    }
+    return this.http.get<IHorariosView[]>(`${this.myAppUrl}${this.ApiHorario}${this.HorarioEstudiante}`, {params})
   }
   consultarHorarios(idDia?: string, idSalon?: string, horaInicio?: string, grupo?: string, idInstructor?: string, codigoComun?: string): Observable<IPreviewHorario[]> {
     // Construir el objeto de parámetros
@@ -81,5 +91,9 @@ export class HorariosService {
   }
   agregarCargaAcademicaEstudiante(cargaEstudiante: ICargaAcademicaEstudiante): Observable<IRespuestaCargaAcademica>{
     return this.http.post<IRespuestaCargaAcademica>(`${this.myAppUrl}${this.CargaAcademica}`, cargaEstudiante);
+  }
+  obtenerCargaAcademicaEstudiante(idEstudiante: number, vigencia: number): Observable<IAsignaturas[]>{
+    return this.http.get<IAsignaturas[]>
+    (`${this.myAppUrl}${this.CargaAcademica}${this.cargaEstudiante}?idEstudiante=${idEstudiante}&vigencia=${vigencia}`);
   }
 }

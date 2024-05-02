@@ -32,7 +32,7 @@ export class AsignacionHorarioComponent implements OnInit{
 
   datosInscrito!: InInscritos;
   datosHorario!: IHorariosView;
-  datosPrograma!: IPrograma;
+  datosPrograma?: IPrograma;
   cargaEstudainte: CargaAcademicaEstudianteHorario[] = [];
   preview: IHorariosView[] = [];
 
@@ -52,6 +52,7 @@ export class AsignacionHorarioComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerVigencia();
     this.obtenerInfoInscrito(this.id);
+    this.obtenerHorarioConCarga([2,3,4])
   }
   obtenerInfoInscrito(idEstudiante: number){
     this._inscritoService.getInscrito(idEstudiante).subscribe(data => {
@@ -72,6 +73,11 @@ export class AsignacionHorarioComponent implements OnInit{
         this._alertService.mostrarMensajes("Hubo un error al cargar horarios.")
       },
       complete: () => console.info()
+    })
+  }
+  obtenerHorarioConCarga(codigosComun: number[]){
+    this._horarioService.getHorariosConCarga(4, 1, codigosComun).subscribe(data => {
+      console.log(data);
     })
   }
   obtenerVigencia(){
