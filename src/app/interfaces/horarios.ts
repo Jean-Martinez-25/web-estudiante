@@ -50,7 +50,7 @@ export interface CargaAcademicaEstudianteHorario{
   Id?: number,
   idEstudiante: number,
   idPrograma: number,
-  idInstructor: number,
+  idDocente: number,
   idAsignatura: number,
   Vigencia: number,
   Semestre: number,

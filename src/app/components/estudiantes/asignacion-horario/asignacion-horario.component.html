@@ -5,9 +5,15 @@
 </div>
 <div class="contendor-principal">
   <div class="container-form">
-    <h3 class="title text-center py-2">Creando horario para estudiante:
-      <br> {{nombre}}
-    </h3>
+    <h3 class="title text-center py-2">Creando horario para estudiante:<br> {{nombre}}</h3>
+      <ng-container *ngIf="preview.length < 1">
+        <div class="infor">
+          <p class="title text-center py-2">Agrega las asignaturas disponibles en la segunda tabla.</p>
+          <mat-icon matTooltip="Si en el segundo recuadro no carga la información es debido a que el estudiante no se ha realizado su carga academica."
+            class="icon start bg-waikawa-gray-600" fontIcon="info">
+          </mat-icon>
+        </div>
+      </ng-container>
       <ng-container *ngIf="preview.length > 0">
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div class="overflow-x-auto">
@@ -16,11 +22,6 @@
               <ng-container matColumnDef="Dia">
                 <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Dia</th>
                 <td mat-cell *matCellDef="let element">{{element.nombreDia}}</td>
-              </ng-container>
-              <!--name-->
-              <ng-container matColumnDef="Docente">
-                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Instructor</th>
-                <td mat-cell *matCellDef="let element">{{element.nombreInstructor}} {{element.apellidoInstructor}}</td>
               </ng-container>
               <!--Programa-->
               <ng-container matColumnDef="Asignatura">
@@ -46,8 +47,8 @@
                   <mat-icon matTooltip="Asignar horario" (click)="remove(element, i)" class="icon start bg-geraldine-600" fontIcon="remove"></mat-icon>
                 </td>
               </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
             </table>
           </div>
         </div>
@@ -72,9 +73,9 @@
                 <td mat-cell *matCellDef="let element">{{element.nombreDia}}</td>
               </ng-container>
               <!--name-->
-              <ng-container matColumnDef="Docente">
-                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Instructor</th>
-                <td mat-cell *matCellDef="let element">{{element.nombreInstructor}} {{element.apellidoInstructor}}</td>
+              <ng-container matColumnDef="Cantidad">
+                <th class="text-jade-400" mat-header-cell *matHeaderCellDef>Cantidad de estudiantes</th>
+                <td mat-cell *matCellDef="let element">{{element.cantidadEstudiantes}}/25</td>
               </ng-container>
               <!--Programa-->
               <ng-container matColumnDef="Asignatura">
@@ -108,4 +109,12 @@
       </main>
     </ng-container>
   </div>
+</div>
+
+<div class="buton-space">
+  <ng-container *ngIf="cargaEstudainte.length > 0">
+    <button  type="submit" (click)="finalizar()" class="bg-jade-400 hover:bg-jade-800 text-paradiso-950 hover:text-white font-bold py-2 px-4 rounded but">
+      Finalizar
+    </button>
+  </ng-container>
 </div>

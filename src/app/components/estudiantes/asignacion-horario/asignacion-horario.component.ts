@@ -22,10 +22,12 @@ import { EstudiantesService } from 'src/app/services/estudiantes.service';
 export class AsignacionHorarioComponent implements OnInit{
   dataSource = new MatTableDataSource<IHorariosView>;
   dataS = new MatTableDataSource<IHorariosView>;
-  displayedColumns: string[] = ['Dia', 'Hora', 'Salon', 'Asignatura', 'Docente', 'Accion'];
+  displayedColumns: string[] = ['Dia', 'Hora', 'Salon', 'Asignatura', 'Cantidad', 'Accion'];
+  displayedColumns2: string[] = ['Dia', 'Hora', 'Salon', 'Asignatura', 'Accion'];
 
   nombre? : string;
   idEstudiante?: number;
+  idPrograma?: number;
   semestre?: number;
   vigencia?: number;
   id: number;
@@ -33,6 +35,7 @@ export class AsignacionHorarioComponent implements OnInit{
   datosInscrito!: InInscritos;
   datosHorario!: IHorariosView;
   datosPrograma?: IPrograma;
+  idsAsignaturas: number[] = [];
   cargaEstudainte: CargaAcademicaEstudianteHorario[] = [];
   preview: IHorariosView[] = [];
 
@@ -52,21 +55,28 @@ export class AsignacionHorarioComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerVigencia();
     this.obtenerInfoInscrito(this.id);
-    this.obtenerHorarioConCarga([2,3,4])
   }
   obtenerInfoInscrito(idEstudiante: number){
     this._inscritoService.getInscrito(idEstudiante).subscribe(data => {
       this.datosInscrito = data;
       this.semestre = data.semestre;
       this.idEstudiante = data.idEstudiante;
-      this.obtenerHorarioDiponible(Number(data.idPrograma), data.semestre);
+      this.idPrograma = Number(data.idPrograma);
       this.obtenerPrograma(Number(data.idPrograma));
       this.obtenerNombre(this.idEstudiante);
     });
   }
-  obtenerHorarioDiponible(idPrograma: number, idSemestre: number){
-    this._horarioService.getHorario(idPrograma, idSemestre).subscribe({
-      next : (response) => {
+  obtenerAsignaturasCae(idEstudiante: number, vigencia: number){
+    this._horarioService.obtenerCargaAcademicaEstudiante(idEstudiante, vigencia).subscribe(data => {
+      for(let item of data){
+        this.idsAsignaturas.push(Number(item.id))
+      }
+      this.obtenerHorarioConCarga(this.idPrograma!, this.semestre!, this.idsAsignaturas);
+    })
+  }
+  obtenerHorarioConCarga(idPrograma: number, semestre: number, codigosComun: number[]){
+    this._horarioService.getHorariosConCarga(idPrograma, semestre, codigosComun).subscribe({
+      next: (response) => {
         this.dataSource.data = response;
       },
       error: (e) => {
@@ -75,14 +85,10 @@ export class AsignacionHorarioComponent implements OnInit{
       complete: () => console.info()
     })
   }
-  obtenerHorarioConCarga(codigosComun: number[]){
-    this._horarioService.getHorariosConCarga(4, 1, codigosComun).subscribe(data => {
-      console.log(data);
-    })
-  }
   obtenerVigencia(){
     this._salonesService.getVigencia().subscribe(data => {
       this.vigencia = data[0].vigencia!;
+      this.obtenerAsignaturasCae(this.id, Number(this.vigencia))
     });
   }
   obtenerPrograma(idPrograma: number){
@@ -96,10 +102,11 @@ export class AsignacionHorarioComponent implements OnInit{
     })
   }
   agregarHorario(datos: IHorariosView){
+    console.log(datos);
     let attr: CargaAcademicaEstudianteHorario = {
       idEstudiante : this.id,
       idPrograma: Number(datos.idPrograma),
-      idInstructor: Number(datos.idInstructor),
+      idDocente: Number(datos.idInstructor),
       idAsignatura: datos.idAsignatura,
       Vigencia: datos.vigencia,
       Semestre: Number(this.semestre),
@@ -110,20 +117,42 @@ export class AsignacionHorarioComponent implements OnInit{
       HoraInicio: datos.horaInicio,
       HoraFin: datos.horaFin,
     }
-    console.log(datos);
+    let mostrarMensaje = false;
+    let interferencia = false;
     //Que no se repita ni idHoraInicio en el idDia
     for(let item of this.cargaEstudainte){
-      if(datos.horaInicio == item.HoraInicio){
-
+      if(datos.horaInicio == item.HoraInicio && datos.idDia == item.idDia){
+        mostrarMensaje = true;
+        interferencia = true;
+        break;
+      }else if(datos.idAsignatura == item.idAsignatura){
+        mostrarMensaje = true;
+        break;
       }
     }
-    this.cargaEstudainte.push(attr);
-    this.preview.push(datos)
-    this.dataS.data = this.preview;
+    if(mostrarMensaje){
+      if(interferencia){
+        this._alertService.mostrarMensajes(`Ya asignaste una clase el dia ${datos.nombreDia} de ${datos.horario}.`);
+      }else{
+        this._alertService.mostrarMensajes(`Ya asignaste la clase de ${datos.asignatura}.`);
+      }
+
+    }else{
+      this.agregar(attr, datos);
+    }
+
   }
   remove(element: any, index: number){
     this.preview.splice(index, 1);
     this.cargaEstudainte.splice(index, 1);
     this.dataS.data = this.preview;
+  }
+  agregar(attr: CargaAcademicaEstudianteHorario, datos: IHorariosView){
+    this.cargaEstudainte.push(attr);
+    this.preview.push(datos)
+    this.dataS.data = this.preview;
+  }
+  finalizar(){
+    console.log(this.cargaEstudainte);
   }
 }
