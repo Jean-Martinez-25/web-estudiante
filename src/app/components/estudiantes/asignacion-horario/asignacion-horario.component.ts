@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InInscritos } from 'src/app/interfaces/inscritos';
 import { HorariosService } from 'src/app/services/horarios.service';
 import { InscritosService } from 'src/app/services/inscritos.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import {MatPaginator} from '@angular/material/paginator';
 import { IHorariosView, IPreviewHorario, CargaAcademicaEstudianteHorario } from 'src/app/interfaces/horarios';
 import { AlertService } from 'src/app/services/alert.service';
 import { MatSort } from '@angular/material/sort';
@@ -19,7 +19,7 @@ import { EstudiantesService } from 'src/app/services/estudiantes.service';
   templateUrl: './asignacion-horario.component.html',
   styleUrls: ['./asignacion-horario.component.css']
 })
-export class AsignacionHorarioComponent implements OnInit{
+export class AsignacionHorarioComponent implements OnInit, AfterViewInit{
   dataSource = new MatTableDataSource<IHorariosView>;
   dataS = new MatTableDataSource<IHorariosView>;
   displayedColumns: string[] = ['Dia', 'Hora', 'Salon', 'Asignatura', 'Cantidad', 'Accion'];
@@ -36,7 +36,7 @@ export class AsignacionHorarioComponent implements OnInit{
   datosHorario!: IHorariosView;
   datosPrograma?: IPrograma;
   idsAsignaturas: number[] = [];
-  cargaEstudainte: CargaAcademicaEstudianteHorario[] = [];
+  cargaEstudiante: CargaAcademicaEstudianteHorario[] = [];
   preview: IHorariosView[] = [];
 
 
@@ -47,10 +47,15 @@ export class AsignacionHorarioComponent implements OnInit{
     private _programaService: ProgramasService,
     private _salonesService: SalonesService,
     private _estudianteService: EstudiantesService,
+    private router: Router,
   ){
     this.id = Number(this.aRoute.snapshot.paramMap.get("id"));
   }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit(): void {
     this.obtenerVigencia();
@@ -74,6 +79,15 @@ export class AsignacionHorarioComponent implements OnInit{
       this.obtenerHorarioConCarga(this.idPrograma!, this.semestre!, this.idsAsignaturas);
     })
   }
+  obtenerHorarioEstudiante(idEstudiante: number, vigencia: number){
+    this._horarioService.obtenerHorarioEstudiante(idEstudiante, vigencia).subscribe(data => {
+      if(data.length > 0){
+        for(let item of data){
+          this.actualizar(item);
+        }
+      }
+    })
+  }
   obtenerHorarioConCarga(idPrograma: number, semestre: number, codigosComun: number[]){
     this._horarioService.getHorariosConCarga(idPrograma, semestre, codigosComun).subscribe({
       next: (response) => {
@@ -88,7 +102,8 @@ export class AsignacionHorarioComponent implements OnInit{
   obtenerVigencia(){
     this._salonesService.getVigencia().subscribe(data => {
       this.vigencia = data[0].vigencia!;
-      this.obtenerAsignaturasCae(this.id, Number(this.vigencia))
+      this.obtenerAsignaturasCae(this.id, Number(this.vigencia));
+      this.obtenerHorarioEstudiante(this.id, Number(this.vigencia));
     });
   }
   obtenerPrograma(idPrograma: number){
@@ -102,7 +117,6 @@ export class AsignacionHorarioComponent implements OnInit{
     })
   }
   agregarHorario(datos: IHorariosView){
-    console.log(datos);
     let attr: CargaAcademicaEstudianteHorario = {
       idEstudiante : this.id,
       idPrograma: Number(datos.idPrograma),
@@ -116,12 +130,13 @@ export class AsignacionHorarioComponent implements OnInit{
       idDia: Number(datos.idDia),
       HoraInicio: datos.horaInicio,
       HoraFin: datos.horaFin,
+      idHorario: Number(datos.id)
     }
     let mostrarMensaje = false;
     let interferencia = false;
     //Que no se repita ni idHoraInicio en el idDia
-    for(let item of this.cargaEstudainte){
-      if(datos.horaInicio == item.HoraInicio && datos.idDia == item.idDia){
+    for(let item of this.preview){
+      if(datos.horaInicio == item.horaInicio && datos.idDia == item.idDia){
         mostrarMensaje = true;
         interferencia = true;
         break;
@@ -144,15 +159,34 @@ export class AsignacionHorarioComponent implements OnInit{
   }
   remove(element: any, index: number){
     this.preview.splice(index, 1);
-    this.cargaEstudainte.splice(index, 1);
+    this.cargaEstudiante.splice(index, 1);
     this.dataS.data = this.preview;
   }
   agregar(attr: CargaAcademicaEstudianteHorario, datos: IHorariosView){
-    this.cargaEstudainte.push(attr);
+    this.cargaEstudiante.push(attr);
+    this.preview.push(datos)
+    this.dataS.data = this.preview;
+  }
+  actualizar(datos: IHorariosView){
     this.preview.push(datos)
     this.dataS.data = this.preview;
   }
   finalizar(){
-    console.log(this.cargaEstudainte);
+    let contador : number = 0;
+    for(let item of this.cargaEstudiante){
+      this._horarioService.agregarHorarioEstudiante(item).subscribe(data => {
+      })
+      contador++;
+    }
+    if(contador > 1){
+      this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignaturas a su horario.`);
+    }else if(contador == 1){
+      this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignatura a su horario.`);
+    }
+    setTimeout(() => {
+      this._inscritoService.getInscritos().subscribe(data => {
+        this.router.navigate(['/persona/listado-inscritos']);
+      })
+    }, 3000);
   }
 }

@@ -8,7 +8,6 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { TeamComponent } from './components/team/team.component';
 import { ListEstudiantesComponent } from './components/estudiantes/list-estudiantes/list-estudiantes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared/shared.module';
 import { VerEstudiantesComponent } from './components/estudiantes/ver-estudiantes/ver-estudiantes.component';
 import { AgregarEditarEstudiantesComponent } from './components/estudiantes/agregar-editar-estudiantes/agregar-editar-estudiantes.component';
 import { ListInstructoresComponent } from './components/instructores/list-instructores/list-instructores.component';
@@ -21,13 +20,14 @@ import { FormularioHorariosComponent } from './components/horarios/formulario-ho
 import { PreviewHorariosComponent } from './components/horarios/preview-horarios/preview-horarios.component';
 import { ListHorariosComponent } from './components/horarios/list-horarios/list-horarios.component';
 import { GaugeChartComponent } from './components/estudiantes/ver-estudiantes/gauge-chart/gauge-chart.component';
+import { AsignacionHorarioComponent } from './components/estudiantes/asignacion-horario/asignacion-horario.component';
+import { AsignacionAsignaturasComponent } from './components/estudiantes/asignacion-asignaturas/asignacion-asignaturas.component';
+import { SharedModule } from './shared/shared.module';
 /*Extensiones agenas*/
 import { NgChartsModule } from 'ng2-charts';
 import { DatosPersonalesComponent } from './components/estudiantes/ver-estudiantes/datos-personales/datos-personales.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { AsignacionHorarioComponent } from './components/estudiantes/asignacion-horario/asignacion-horario.component';
-import { AsignacionAsignaturasComponent } from './components/estudiantes/asignacion-asignaturas/asignacion-asignaturas.component';
 
 
 @NgModule({
@@ -60,7 +60,6 @@ import { AsignacionAsignaturasComponent } from './components/estudiantes/asignac
     NgChartsModule,
     HttpClientModule,
     NgxMaterialTimepickerModule,
-
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}

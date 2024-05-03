@@ -8,6 +8,14 @@
     <h3 class="title text-center py-2">Asignación de asignaturas para el/la estudiante:
       <br> {{nombre}}
     </h3>
+    <ng-container *ngIf="preview.length < 1">
+      <div class="infor">
+        <p class="title text-center py-2">Agrega las asignaturas en la segunda tabla.</p>
+        <mat-icon matTooltip="Agrega las asignaturas que deseas dar este semestre."
+          class="icon start bg-waikawa-gray-600" fontIcon="info">
+        </mat-icon>
+      </div>
+    </ng-container>
       <ng-container *ngIf="preview.length > 0 ">
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div class="overflow-x-auto">

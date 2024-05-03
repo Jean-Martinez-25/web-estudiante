@@ -8,7 +8,7 @@
     <h3 class="title text-center py-2">Creando horario para estudiante:<br> {{nombre}}</h3>
       <ng-container *ngIf="preview.length < 1">
         <div class="infor">
-          <p class="title text-center py-2">Agrega las asignaturas disponibles en la segunda tabla.</p>
+          <p class="title text-center py-2">Asignar horario disponible en la segunda tabla.</p>
           <mat-icon matTooltip="Si en el segundo recuadro no carga la información es debido a que el estudiante no se ha realizado su carga academica."
             class="icon start bg-waikawa-gray-600" fontIcon="info">
           </mat-icon>
@@ -64,7 +64,7 @@
             <br>Semestre: {{semestre}}
           </h3>
         </div>
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl py-6 sm:px-2 lg:px-2">
           <div class="overflow-x-auto">
             <table mat-table [dataSource]="dataSource" class="table-auto w-full border-collapse border tabla">
               <!--Id-->
@@ -105,14 +105,13 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-        </div>
-      </main>
+        </div>      </main>
     </ng-container>
   </div>
 </div>
 
 <div class="buton-space">
-  <ng-container *ngIf="cargaEstudainte.length > 0">
+  <ng-container *ngIf="cargaEstudiante.length > 0">
     <button  type="submit" (click)="finalizar()" class="bg-jade-400 hover:bg-jade-800 text-paradiso-950 hover:text-white font-bold py-2 px-4 rounded but">
       Finalizar
     </button>

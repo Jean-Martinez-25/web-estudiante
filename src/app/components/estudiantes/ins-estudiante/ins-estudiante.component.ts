@@ -30,6 +30,7 @@ export class InsEstudianteComponent implements OnInit{
     private _estudianteService: EstudiantesService,
     private _inscritoService: InscritosService,
     private _alertMensaje: AlertService,
+    private router: Router,
     private _programaService: ProgramasService){
     this.formInscripcion = this.fb.group({
       idEstudiante: ['', Validators.required],
@@ -69,11 +70,11 @@ export class InsEstudianteComponent implements OnInit{
       vigencia: this.formInscripcion.value.vigencia
     }
     this._inscritoService.postInscritos(datosInscrito).subscribe(data => {
-      this._alertMensaje.mostrarMensajes(`El estudiante: ${this.nombreEstudiante} ya está matriculado.`, "Close")
+      this._alertMensaje.mostrarMensajes(`El estudiante: ${this.nombreEstudiante} ha sido matriculado correctamente.`, "Close")
     })
     setTimeout(() => {
       this._inscritoService.getInscritos().subscribe(data => {
-        console.log(data);
+        this.router.navigate(['/persona/listado-aspirantes']);
       })
     }, 3000);
   }

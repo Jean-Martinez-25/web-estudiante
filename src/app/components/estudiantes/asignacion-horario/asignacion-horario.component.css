@@ -31,7 +31,7 @@
 }
 .preview-horarios{
   width: 50%;
-  max-height: 700px;
+  max-height: 430px;
   overflow-y: auto;
   margin-right: 10px;
   margin-right: 5px;
@@ -61,8 +61,8 @@
   border-radius: 20px;
 }
 .infor{
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
   display: block;
   text-align: center;
   justify-content: center;

@@ -1,4 +1,5 @@
 export interface Ihorario {
+  Id?: number,
   IdInstructor: number,
   IdGrupo: number,
   CodigoComun: number,
@@ -12,6 +13,7 @@ export interface Ihorario {
   IdPrograma: number,
 }
 export interface IHorariosView {
+  id?: number,
   nombreInstructor : string,
   apellidoInstructor : string,
   idInstructor?: number,
@@ -60,4 +62,5 @@ export interface CargaAcademicaEstudianteHorario{
   idDia: number,
   HoraInicio: number,
   HoraFin: number
+  idHorario: number,
 }

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InInscritos } from 'src/app/interfaces/inscritos';
 import { HorariosService } from 'src/app/services/horarios.service';
 import { InscritosService } from 'src/app/services/inscritos.service';
@@ -13,6 +13,7 @@ import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { ICargaAcademicaEstudiante, IAsignaturas } from 'src/app/interfaces/asignaturas';
 import { AsignaturasService } from 'src/app/services/asignaturas.service';
 import { compileNgModule } from '@angular/compiler';
+import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-asignacion-asignaturas',
@@ -36,7 +37,6 @@ export class AsignacionAsignaturasComponent {
   cargaEstudiante: ICargaAcademicaEstudiante[] = [];
   preview: IAsignaturas[] = [];
 
-
   constructor(private aRoute: ActivatedRoute,
     private _inscritoService: InscritosService,
     private _horarioService: HorariosService,
@@ -45,10 +45,10 @@ export class AsignacionAsignaturasComponent {
     private _salonesService: SalonesService,
     private _estudianteService: EstudiantesService,
     private _asignaturaService: AsignaturasService,
+    private router: Router,
   ){
     this.id = Number(this.aRoute.snapshot.paramMap.get("id"));
   }
-
 
   ngOnInit(): void {
     this.obtenerVigencia();
@@ -141,18 +141,22 @@ export class AsignacionAsignaturasComponent {
     this.dataS.data = this.preview;
   }
   finalizar(){
-    let insert: boolean = false;
     let contador : number = 0;
     for(let item of this.cargaEstudiante){
       this._horarioService.agregarCargaAcademicaEstudiante(item).subscribe(data => {
-        insert = true;
-        contador += 1;
+
       })
+      contador++;
     }
-    if(insert && contador > 1){
+    if(contador > 1){
       this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignaturas.`);
-    }else if(insert && contador == 1){
+    }else if(contador == 1){
       this._alertService.mostrarMensajes(`Se asignó al almuno ${this.nombre} (${contador}) asignatura.`);
     }
+    setTimeout(() => {
+      this._inscritoService.getInscritos().subscribe(data => {
+        this.router.navigate(['/persona/listado-inscritos']);
+      })
+    }, 3000);
   }
 }
