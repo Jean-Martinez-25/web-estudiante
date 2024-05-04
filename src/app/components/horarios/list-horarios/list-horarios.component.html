@@ -33,7 +33,7 @@
           </ng-container>
           <ng-container matColumnDef="Hora">
             <th class="text-paradiso-400" mat-header-cell *matHeaderCellDef>Hora</th>
-            <td mat-cell *matCellDef="let element"> {{element.horaInicio}} - {{element.horaFin}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
           </ng-container>
           <ng-container matColumnDef="Jornada">
             <th class="text-paradiso-400 text-center" mat-header-cell *matHeaderCellDef>Jornada</th>
@@ -43,7 +43,6 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
   </main>
 </ng-container>

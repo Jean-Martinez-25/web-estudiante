@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import {IEstudiante, INota } from 'src/app/interfaces/estudiante';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ChartOptions, ChartType } from 'chart.js';
-import { GaugeChartComponent } from './gauge-chart/gauge-chart.component';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
 @Component({

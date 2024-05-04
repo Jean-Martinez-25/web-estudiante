@@ -16,7 +16,6 @@
           <div class="dSub d1 bg-paradiso-100">
             <p class="sub-title text-paradiso-950">Datos personales</p>
           </div>
-          <app-datos-personales [datosEstudiante]="datosEstudiante"></app-datos-personales>
         </div>
       </mat-grid-tile>
       <ng-container *ngIf="courses as cursos">
@@ -29,7 +28,6 @@
               <div class="nota text-center">
                 <p class="text-paradiso-100 font-medium">Asignatura:</p>
                 <p class="text-paradiso-300 font-mediu dates">{{ curso.nombre }}</p>
-                <app-gauge-chart [curso]="curso"></app-gauge-chart>
               </div>
               <div class="infoNota">
                 <div class="asignatura">

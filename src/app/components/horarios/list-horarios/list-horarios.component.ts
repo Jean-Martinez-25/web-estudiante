@@ -50,6 +50,7 @@ export class ListHorariosComponent implements OnInit, AfterViewInit{
   obtenerHorarios(id: number, semestre: number){
     this._horarioService.getHorario(id, semestre).subscribe(data => {
       this.dataSource.data = data;
+      console.log(data);
     })
   }
 }

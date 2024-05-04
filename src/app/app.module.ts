@@ -19,13 +19,11 @@ import { CrearHorariosComponent } from './components/horarios/crear-horarios/cre
 import { FormularioHorariosComponent } from './components/horarios/formulario-horarios/formulario-horarios.component';
 import { PreviewHorariosComponent } from './components/horarios/preview-horarios/preview-horarios.component';
 import { ListHorariosComponent } from './components/horarios/list-horarios/list-horarios.component';
-import { GaugeChartComponent } from './components/estudiantes/ver-estudiantes/gauge-chart/gauge-chart.component';
 import { AsignacionHorarioComponent } from './components/estudiantes/asignacion-horario/asignacion-horario.component';
 import { AsignacionAsignaturasComponent } from './components/estudiantes/asignacion-asignaturas/asignacion-asignaturas.component';
 import { SharedModule } from './shared/shared.module';
 /*Extensiones agenas*/
 import { NgChartsModule } from 'ng2-charts';
-import { DatosPersonalesComponent } from './components/estudiantes/ver-estudiantes/datos-personales/datos-personales.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
@@ -38,8 +36,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ListEstudiantesComponent,
     VerEstudiantesComponent,
     AgregarEditarEstudiantesComponent,
-    GaugeChartComponent,
-    DatosPersonalesComponent,
     ListInstructoresComponent,
     VerInstructorComponent,
     AgregarEditarInstructorComponent,

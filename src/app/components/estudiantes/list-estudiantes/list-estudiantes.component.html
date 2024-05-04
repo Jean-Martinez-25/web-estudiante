@@ -34,7 +34,6 @@
         <ng-container matColumnDef="acciones">
           <th class="text-jade-500" mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon routerLink="/persona/ver-aspirante/{{element.id}}" matTooltip="View" class="icon ver" fontIcon="search"></mat-icon>
             <mat-icon routerLink="/persona/editar-aspirante/{{element.id}}" matTooltip="Edit" class="bg-salomie-400 icon" fontIcon="edit"></mat-icon>
             <mat-icon (click)="eliminarEstudiante(element.id)" matTooltip="Delete" class="bg-geraldine-500 icon" fontIcon="delete"></mat-icon>
           </td>
