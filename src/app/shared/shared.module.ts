@@ -21,6 +21,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSidenavModule} from '@angular/material/sidenav';
 @NgModule({
   declarations: [
 
@@ -41,7 +42,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatDatepickerModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSidenavModule
   ],
   exports: [
     MatTableModule,
@@ -59,7 +61,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatDatepickerModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }

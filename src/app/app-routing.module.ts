@@ -1,23 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { TeamComponent } from './components/team/team.component';
-import { CrearHorariosComponent } from './components/horarios/crear-horarios/crear-horarios.component';
+import { LoginComponent } from './components/login/login.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 const routes: Routes = [
-  {path: 'inicio', component: InicioComponent},
-  {path: 'team', component: TeamComponent},
+  {
+    path: 'bases',
+    component: MenuComponent,
+    loadChildren: () => import('./components/bases/bases.module').then(m => m.BasesModule)
+  },
   {
     path: 'persona',
-    loadChildren: () => import('./components/estudiantes/estudiantes.module').then(m => m.PersonaModule)
+    component: MenuComponent,
+    loadChildren: () => import('./components/estudiantes/estudiantes.module').then(m => m.EstudianteModule)
   },
   {
     path: 'instructor',
-    loadChildren: () => import('./components/instructores/instructores.module').then(m => m.PersonaModule)
+    component: MenuComponent,
+    loadChildren: () => import('./components/instructores/instructores.module').then(m => m.InstModule)
   },
-
-  {path: 'crear-horarios', component: CrearHorariosComponent},
-  {path: '**', redirectTo: 'inicio', pathMatch: 'full'}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'horarios',
+    component: MenuComponent,
+    loadChildren: () => import('./components/horarios/horarios.module').then(m => m.HorariosModule)
+  },
+  {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({

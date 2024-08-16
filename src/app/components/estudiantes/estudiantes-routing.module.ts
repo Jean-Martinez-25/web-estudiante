@@ -8,7 +8,7 @@ import { VerEstudiantesComponent } from './ver-estudiantes/ver-estudiantes.compo
 import { AsignacionHorarioComponent } from './asignacion-horario/asignacion-horario.component';
 import { AsignacionAsignaturasComponent } from './asignacion-asignaturas/asignacion-asignaturas.component';
 
-const routes: Routes = [
+const rutas: Routes = [
   {
     path: '',
     children: [
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(rutas)],
   exports: [RouterModule]
 })
 export class EstudianteRoutingModule { }

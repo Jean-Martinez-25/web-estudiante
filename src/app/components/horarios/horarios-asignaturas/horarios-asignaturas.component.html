@@ -1,0 +1,23 @@
+<div class="superiorPart">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 item name">
+    <p class="text-3xl font-bold tracking-tight text-paradiso-50 title-page">Horarios por asignaturas</p>
+  </div>
+</div>
+<div>
+  <div class="container-form">
+    <form [formGroup]="buscarHorarios" class="shadow-md rounded-lg overflow-hidden frm">
+      <mat-grid-list rowHeight="150px" cols="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccione un programa</mat-label>
+          <mat-select formControlName="programa">
+            <mat-option value="1">Administracion</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div class="clases">
+
+  </div>
+</div>
+

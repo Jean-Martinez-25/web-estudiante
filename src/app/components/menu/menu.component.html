@@ -1,0 +1,70 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div class="flex flex-col flex-start w-64">
+      <ul class="text-left">
+        <li>
+          <a routerLink="/bases/inicio" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">home</mat-icon>Inicio
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/persona/listado-aspirantes" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">school</mat-icon>
+              Aspirantes
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/instructor/listado-instructores" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">domain_add</mat-icon>
+              Instructores
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/persona/listado-inscritos" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">face</mat-icon>
+              Inscritos
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/horarios/crear-horarios" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">schedule</mat-icon>
+              Horarios
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/horarios/horarios-asignaturas" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">schedule</mat-icon>
+              Horarios Asignaturas
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/bases/team" class="text-white hover:text-gray-200 hover:bg-gray-700 rounded-md px-4 py-2 text-sm font-medium enlace">
+            <span>
+              <mat-icon class="mr-2 icon-li">group</mat-icon>
+              Team
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </mat-drawer>
+  <div class="icon-container">
+    <button mat-icon-button matTooltip="Basic" (click)="drawer.toggle()" aria-label="Example icon-button with a heart icon">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="menu"></mat-icon>
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</mat-drawer-container>
+

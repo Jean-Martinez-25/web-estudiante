@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { IEstudiante } from 'src/app/interfaces/estudiante';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProgramasService } from 'src/app/services/programas.service';
 import { IPrograma } from 'src/app/interfaces/programa';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar-editar-estudiantes',
